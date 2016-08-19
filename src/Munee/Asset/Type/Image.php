@@ -198,7 +198,10 @@ class Image extends Type
                     if ('http' == substr($placeholder, 0, 4)) {
                         $ret = $this->getImageByUrl($placeholder);
                     } else {
-                        $ret = $placeholder;
+                    	if(!is_callable($placeholder))
+                        	$ret = $placeholder;
+                    	else
+                    		$ret = call_user_func($placeholder, $this);
                     }
                     break;
                 }
